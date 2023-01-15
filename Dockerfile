@@ -164,8 +164,10 @@
 
 FROM ubuntu:20.04
 
+RUN export DEBIAN_FRONTEND=noninteractive
+
 RUN apt-get update
-RUN apt-get install \
+RUN apt-get -yq install \
   build-essential \
   libpcre3-dev \
   zlib1g-dev \
@@ -177,10 +179,10 @@ RUN apt-get install \
 
 RUN cd /opt
 
-RUN git clone https://github.com/nginx/nginx/ \
-  git clone https://github.com/kaltura/media-framework/ \
-  git clone https://github.com/Haivision/srt \
-  git clone https://github.com/kaltura/nginx-srt-module \
+RUN git clone https://github.com/nginx/nginx/ && \
+  git clone https://github.com/kaltura/media-framework/ && \
+  git clone https://github.com/Haivision/srt && \
+  git clone https://github.com/kaltura/nginx-srt-module && \
   git clone https://github.com/kaltura/nginx-stream-preread-str-module
 
 RUN cd /opt/srt
