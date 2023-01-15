@@ -177,15 +177,14 @@ RUN apt-get -yq install \
   libssl-dev \
   php-fpm \
   php-curl \
-  git \
-  libsrt-dev
+  git
 
 RUN cd /opt && \
-    git clone https://github.com/nginx/nginx/ && \
-    git clone https://github.com/kaltura/media-framework/ && \
-    git clone https://github.com/Haivision/srt && \
-    git clone https://github.com/kaltura/nginx-srt-module && \
-    git clone https://github.com/kaltura/nginx-stream-preread-str-module
+    git clone --single-branch https://github.com/nginx/nginx/ && \
+    git clone --single-branch https://github.com/kaltura/media-framework/ && \
+    git clone --single-branch https://github.com/Haivision/srt && \
+    git clone --single-branch https://github.com/kaltura/nginx-srt-module && \
+    git clone --single-branch https://github.com/kaltura/nginx-stream-preread-str-module
 
 
 RUN cd /opt/srt && \
@@ -193,13 +192,13 @@ RUN cd /opt/srt && \
     make && \
     make install
 
-RUN cd /opt/nginx && \
-    /opt/media-framework/conf/build.sh /opt/nginx-srt-module /opt/nginx-stream-preread-str-module && \
-    make && \
-    make install
+# RUN cd /opt/nginx && \
+#     /opt/media-framework/conf/build.sh /opt/nginx-srt-module /opt/nginx-stream-preread-str-module && \
+#     make && \
+#     make install
 
-RUN mv /usr/local/nginx/conf/nginx.conf /usr/local/nginx/conf/nginx.conf.orig && \
-  ln -s /opt/media-framework/conf/nginx.conf /usr/local/nginx/conf/nginx.conf && \
-  mkdir /var/log/nginx
+# RUN mv /usr/local/nginx/conf/nginx.conf /usr/local/nginx/conf/nginx.conf.orig && \
+#   ln -s /opt/media-framework/conf/nginx.conf /usr/local/nginx/conf/nginx.conf && \
+#   mkdir /var/log/nginx
 
-CMD ["/usr/local/nginx/sbin/nginx"]
+# CMD ["/usr/local/nginx/sbin/nginx"]
