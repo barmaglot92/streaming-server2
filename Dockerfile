@@ -162,9 +162,9 @@
 # CMD ["/entrypoint.sh"]
 
 
-FROM ubuntu:20.04 as build
+FROM ubuntu:20.04
 
-RUN apt update
+RUN apt-get update
 RUN apt-get install \
   build-essential \
   libpcre3-dev \
