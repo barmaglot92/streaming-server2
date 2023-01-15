@@ -197,10 +197,13 @@ RUN cd /opt/nginx && \
     make && \
     make install
 
-# RUN mv /usr/local/nginx/conf/nginx.conf /usr/local/nginx/conf/nginx.conf.orig && \
-#   ln -s /opt/media-framework/conf/nginx.conf /usr/local/nginx/conf/nginx.conf && \
-#   mkdir /var/log/nginx
+RUN mv /usr/local/nginx/conf/nginx.conf /usr/local/nginx/conf/nginx.conf.orig && \
+  ln -s /opt/media-framework/conf/nginx.conf /usr/local/nginx/conf/nginx.conf && \
+  mkdir /var/log/nginx
 
-# CMD ["/usr/local/nginx/sbin/nginx"]
+EXPOSE 1935
 
-CMD ["sleep 10m"]
+ADD entrypoint.sh /
+RUN chmod +x /entrypoint.sh
+
+CMD ["/entrypoint.sh"]
