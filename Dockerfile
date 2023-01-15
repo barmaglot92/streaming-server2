@@ -164,7 +164,8 @@
 
 FROM ubuntu:20.04
 
-RUN export DEBIAN_FRONTEND=noninteractive
+ENV DEBIAN_FRONTEND=noninteractive
+ENV TZ=Europe/Moscow
 
 RUN apt-get update
 RUN apt-get -yq install \
