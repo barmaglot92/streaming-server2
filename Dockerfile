@@ -177,7 +177,8 @@ RUN apt-get -yq install \
   libssl-dev \
   php-fpm \
   php-curl \
-  git
+  git \
+  libsrt-dev
 
 RUN cd /opt && \
     git clone https://github.com/nginx/nginx/ && \
