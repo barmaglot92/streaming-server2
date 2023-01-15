@@ -189,7 +189,7 @@ RUN cd /opt/srt
 
 RUN ./configure && \
   make && \
-  make install \
+  make install
 
 RUN cd /opt/nginx
 
