@@ -176,7 +176,8 @@ RUN apt-get -yq install \
   cmake \
   libssl-dev \
   php-fpm \
-  php-curl
+  php-curl \
+  git
 
 RUN cd /opt
 
