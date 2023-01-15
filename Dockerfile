@@ -179,25 +179,23 @@ RUN apt-get -yq install \
   php-curl \
   git
 
-RUN cd /opt
+RUN cd /opt && \
+    git clone https://github.com/nginx/nginx/ && \
+    git clone https://github.com/kaltura/media-framework/ && \
+    git clone https://github.com/Haivision/srt && \
+    git clone https://github.com/kaltura/nginx-srt-module && \
+    git clone https://github.com/kaltura/nginx-stream-preread-str-module
 
-RUN git clone https://github.com/nginx/nginx/ && \
-  git clone https://github.com/kaltura/media-framework/ && \
-  git clone https://github.com/Haivision/srt && \
-  git clone https://github.com/kaltura/nginx-srt-module && \
-  git clone https://github.com/kaltura/nginx-stream-preread-str-module
 
-RUN cd /opt/srt
+RUN cd /opt/srt && \
+    ./configure && \
+    make && \
+    make install
 
-RUN ./configure && \
-  make && \
-  make install
-
-RUN cd /opt/nginx
-
-RUN /opt/media-framework/conf/build.sh /opt/nginx-srt-module /opt/nginx-stream-preread-str-module && \
-  make && \
-  make install
+RUN cd /opt/nginx && \
+    /opt/media-framework/conf/build.sh /opt/nginx-srt-module /opt/nginx-stream-preread-str-module && \
+    make && \
+    make install
 
 RUN mv /usr/local/nginx/conf/nginx.conf /usr/local/nginx/conf/nginx.conf.orig && \
   ln -s /opt/media-framework/conf/nginx.conf /usr/local/nginx/conf/nginx.conf && \
