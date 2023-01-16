@@ -199,7 +199,8 @@ RUN cd /opt/nginx && \
 
 RUN mv /usr/local/nginx/conf/nginx.conf /usr/local/nginx/conf/nginx.conf.orig && \
   ln -s /opt/media-framework/conf/nginx.conf /usr/local/nginx/conf/nginx.conf && \
-  mkdir /var/log/nginx
+  mkdir /var/log/nginx && \
+  ldconfig
 
 EXPOSE 1935
 
